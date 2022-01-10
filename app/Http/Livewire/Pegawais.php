@@ -5,12 +5,15 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Pegawai;
+use Illuminate\Contracts\Session\Session;
 
 class Pegawais extends Component
 {
     use WithPagination;
     public $pegawais, 
-    $nmpeg, $npwp, $nmrek,
+        $nmpeg,
+        $npwp,
+        $nmrek,
         $nm_bank,
         $rekening,
         $bersih,
@@ -33,13 +36,15 @@ class Pegawais extends Component
         $nrs,
         $nip,
         $nama_supplier,
-    $pegawai_id;
+        $pegawai_id;
     public $isModal = 0;
 
     public function render()
     {
         $this->pegawais = Pegawai::all();
-        return view('livewire.pegawais');
+        $data = Pegawai::all();
+        Session::put('data', $data);
+        return view('livewire.pegawais')->with('data', $data);
     }
 
     public function create()

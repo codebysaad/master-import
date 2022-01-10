@@ -5,6 +5,7 @@ use App\Imports\UsersImport;
 use App\Exports\UsersExport;
 use App\Imports\PegawaiImport;
 use App\Http\Livewire\Pegawais;
+use App\Http\Livewire\MasterImport;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
     })->name('dashboard');
     
     Route::get('pegawai', Pegawais::class)->name('pegawai');
+    Route::get('master-import', MasterImport::class)->name('master-import');
     // Route::get('pegawai', function () {
     //     $pegawais = Pegawais::paginate(15);
     //     $pegawais->withPath('custom/url');

@@ -15,13 +15,8 @@
        <h1 class="fs-5 fw-bold text-center">Import & Export CSV in Laravel 8</h1>
        <div class="row">
            <div class="d-flex my-2">
-               <a href="export-csv" target="_blank" class="btn btn-primary me-1">Export Data</a>
-               <button type="button" class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Import Data
-                </button>
-                <a href="{{ route('master-import') }}" type="button" class="btn btn-warning text-white">
-                Submit
-                </a>
+               <a href="export-csv" target="_blank" class="btn btn-primary me-1">Export CSV</a>
+               <a href="export-csv" target="_blank" class="btn btn-primary me-1">Export XLSX</a>
            </div>
            @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,7 +27,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                    <th scope="col">#</th>
                     <th scope="col">No</th>
                     <th scope="col">Nama Supplier</th>
                     <th scope="col">Nama Pemilik Rekening</th>
@@ -41,16 +35,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($pegawais as $key => $item)
+                @foreach ($data_pegawais as $key => $item)
                     <tr>
-                        <th scope="row">
-                            <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input" name="checked" id="checked">
-                        </th>
                         <th scope="row">{{ ++$key }}</th>
                         <td>{{ $item->nama_supplier }}</td>
                         <td>{{ $item->nmrek }}</td>
                         <td>{{ $item->rekening }}</td>
-                        <td>{{ $item->bersih }}</td>
+                        <td>
+                            <input id="bersih" name="bersih" type="numeric" class="form-control" placeholder="bersih" aria-label="bersih" aria-describedby="basic-addon1">
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -62,26 +55,6 @@
        </div>
    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Import CSV</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="import" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="input-group mb-3">
-                        <input type="file" name="file" class="form-control">
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   </body>
